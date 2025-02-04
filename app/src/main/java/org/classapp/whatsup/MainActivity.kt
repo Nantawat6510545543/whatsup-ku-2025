@@ -43,9 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.wrapContentSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting(
-                        name = "Android"
-                    )
+                    MainScreenWithBottomNavBar()
                 }
             }
         }
@@ -97,10 +95,10 @@ fun MainScreenWithBottomNavBar() {
             composable(route = DestinationScreens.Highlight.route) {
                 HighlightScreen()
             }
-            composable(route = DestinationScreens.Highlight.route) {
+            composable(route = DestinationScreens.NearMe.route) {
                 NearMeScreen()
             }
-            composable(route = DestinationScreens.Highlight.route) {
+            composable(route = DestinationScreens.MyEvents.route) {
                 MyEventsScreen()
             }
         }

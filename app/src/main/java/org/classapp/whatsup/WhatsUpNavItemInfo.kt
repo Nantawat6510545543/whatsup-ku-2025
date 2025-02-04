@@ -32,6 +32,3 @@ data class WhatsUpNavItemInfo(
         )
     }
 }
-
-
-

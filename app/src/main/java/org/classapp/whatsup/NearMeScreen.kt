@@ -1,23 +1,14 @@
 package org.classapp.whatsup
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import org.classapp.whatsup.ui.theme.WhatsUpTheme
-import androidx.compose.material3.OutlinedTextField
+import androidx.constraintlayout.compose.*
 
 @Composable
 fun NearMeScreen() {
@@ -28,14 +19,16 @@ fun NearMeScreen() {
                 .padding(4.dp),
             color = MaterialTheme.colorScheme.background
         ) {
+            // Content on Surface
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // Column Content
                 Text(text = "Events Near Me")
                 LocationCoordinateDisplay(lat = "0.0", lon = "0.0")
-            }
+            } // End Column
         }
     }
 }
@@ -60,7 +53,8 @@ fun LocationCoordinateDisplay(lat: String, lon: String) {
             onClick = { /* TODO: Handle click */ },
             modifier = Modifier.constrainAs(goBtn) {
                 top.linkTo(parent.top, margin = 8.dp)
-                end.linkTo(parent.end)
+                end.linkTo(parent.end, margin = 0.dp)
+                width = Dimension.wrapContent
             }
         ) {
             Text(text = "GO")
@@ -71,8 +65,8 @@ fun LocationCoordinateDisplay(lat: String, lon: String) {
             label = { Text("Latitude") },
             onValueChange = {},
             modifier = Modifier.constrainAs(latField) {
-                top.linkTo(parent.top)
-                start.linkTo(parent.start)
+                top.linkTo(parent.top, margin = 0.dp)
+                start.linkTo(parent.start, margin = 0.dp)
                 end.linkTo(goBtn.start, margin = 8.dp)
                 width = Dimension.fillToConstraints
             }
@@ -83,14 +77,11 @@ fun LocationCoordinateDisplay(lat: String, lon: String) {
             label = { Text("Longitude") },
             onValueChange = {},
             modifier = Modifier.constrainAs(lonField) {
-                top.linkTo(latField.bottom)
-                start.linkTo(parent.start)
+                top.linkTo(latField.bottom, margin = 8.dp)
+                start.linkTo(parent.start, margin = 0.dp)
                 end.linkTo(goBtn.start, margin = 8.dp)
                 width = Dimension.fillToConstraints
             }
         )
     }
 }
-
-
-

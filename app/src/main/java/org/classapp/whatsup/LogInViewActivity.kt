@@ -1,5 +1,6 @@
 package org.classapp.whatsup
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -21,14 +22,14 @@ class LogInViewActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val singIbBtn: Button = findViewById(R.id.signInBtn)
-        val singInPanel: CardView = findViewById(R.id.signInPanel)
+        val signInBtn: Button = findViewById(R.id.signInBtn)
+        val signInPanel: CardView = findViewById(R.id.signInPanel)
         val usernameTxt: EditText = findViewById(R.id.usernameTxt)
         val pwdTxt: EditText = findViewById(R.id.pwdTxt)
         val enterBtn: Button = findViewById(R.id.enterBtn)
 
-        singIbBtn.setOnClickListener {
-            singInPanel.visibility = View.VISIBLE
+        signInBtn.setOnClickListener {
+            signInPanel.visibility = View.VISIBLE
         }
 
         var username: String
@@ -40,9 +41,13 @@ class LogInViewActivity : AppCompatActivity() {
                 Toast.makeText( this, "Welcome to Member Area", Toast.LENGTH_LONG).show()
                 usernameTxt.setText("")
                 pwdTxt.setText("")
-                singInPanel.visibility = View.GONE
+                signInPanel.visibility = View.GONE
+
+                val i = Intent(this, MainActivity::class.java)
+                startActivity(i)
+            } else {
+                Toast.makeText(this, "Please Try Again", Toast.LENGTH_LONG).show()
             }
-            else Toast.makeText( this, "Please Try Again", Toast.LENGTH_LONG).show()
         }
     }
 }
