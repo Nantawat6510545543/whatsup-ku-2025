@@ -1,6 +1,7 @@
 package org.classapp.whatsup
 
 import android.os.Bundle
+import android.text.Highlights
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,11 +20,18 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.classapp.whatsup.ui.theme.WhatsUpTheme
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.navigation.NavGraph.Companion.findStartDestination
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,29 +39,44 @@ class MainActivity : ComponentActivity() {
         //enableEdgeToEdge()
         setContent {
             WhatsUpTheme {
-                Surface (modifier = Modifier.wrapContentSize(),
-                    color = MaterialTheme.colorScheme.background) {
+                Surface(
+                    modifier = Modifier.wrapContentSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
                     Greeting(
                         name = "Android"
                     )
                 }
             }
         }
-        Toast.makeText(this,"Welcome to WhatsUp!!!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Welcome to WhatsUp!!!", Toast.LENGTH_LONG).show()
     }
 }
 
 @Composable
 fun MainScreenWithBottomNavBar() {
-    val navController = rememberNavController() // Remember navigation controller for managing navigation
-
+    val navController =
+        rememberNavController() // Remember navigation controller for managing navigation
+    var navSelectedItem by remember {
+        mutableStateOf(0)
+    }
     Scaffold(
         bottomBar = {
             NavigationBar {
                 WhatsUpNavItemInfo().getAllNavItems().forEachIndexed { index, itemInfo ->
                     NavigationBarItem(
-                        selected = false,
-                        onClick = { /* TODO: Handle navigation */ },
+                        selected = (index == navSelectedItem),
+                        onClick = {
+                            navSelectedItem = index
+
+                            navController.navigate(itemInfo.route) {
+                                popUpTo(navController.graph.findStartDestination().id) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
                         icon = {
                             Icon(
                                 imageVector = itemInfo.icon,
@@ -68,16 +91,21 @@ fun MainScreenWithBottomNavBar() {
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = DestinationScreens.NearMe.route,
+            startDestination = DestinationScreens.Highlight.route,
             modifier = Modifier.padding(paddingValues)
         ) {
-            composable(route = DestinationScreens.NearMe.route) {
+            composable(route = DestinationScreens.Highlight.route) {
+                HighlightScreen()
+            }
+            composable(route = DestinationScreens.Highlight.route) {
                 NearMeScreen()
+            }
+            composable(route = DestinationScreens.Highlight.route) {
+                MyEventsScreen()
             }
         }
     }
 }
-
 
 
 @Composable

@@ -17,17 +17,17 @@ data class WhatsUpNavItemInfo(
             WhatsUpNavItemInfo(
                 label = "Highlight",
                 icon = Icons.Filled.Star,
-                route = DestinationScreen.Highlight.route
+                route = DestinationScreens.Highlight.route
             ),
             WhatsUpNavItemInfo(
                 label = "Near Me",
                 icon = Icons.Filled.LocationOn,
-                route = DestinationScreen.NearMe.route
+                route = DestinationScreens.NearMe.route
             ),
             WhatsUpNavItemInfo(
                 label = "My Events",
                 icon = Icons.Filled.Face,
-                route = DestinationScreen.MyEvents.route
+                route = DestinationScreens.MyEvents.route
             )
         )
     }
