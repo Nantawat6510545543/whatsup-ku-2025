@@ -45,7 +45,7 @@ secrets{
     propertiesFileName = "secrets.properties"
     defaultPropertiesFileName = "local.defaults.properties"
 
-    ignoreList.add("keyToIngnore")
+    ignoreList.add("keyToIgnore")
     ignoreList.add("sdk.*")
 }
 
