@@ -32,13 +32,14 @@ import org.classapp.whatsup.ui.theme.WhatsUpTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import org.classapp.whatsup.customui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //enableEdgeToEdge()
         setContent {
-            WhatsUpTheme {
+            AppTheme {
                 Surface(
                     modifier = Modifier.wrapContentSize(),
                     color = MaterialTheme.colorScheme.background
@@ -107,18 +108,3 @@ fun MainScreenWithBottomNavBar() {
     }
 }
 
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Button(onClick = { /*TODO*/ }) {
-        Text(text = "Click me")
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    WhatsUpTheme {
-        MainScreenWithBottomNavBar()
-    }
-}
